@@ -1,0 +1,15 @@
+[user]
+        name = Hury
+        email = mashurimansur18@gmail.com
+[core]
+        editor = code --wait
+[diff]
+        tool = default-difftool
+[difftool "default-difftool"]
+        cmd = code --wait --diff $LOCAL $REMOTE
+[alias]
+        cm = commit -m
+        cam = commit -am
+        po = push origin
+        cd = checkout develop
+        cb = checkout -b
