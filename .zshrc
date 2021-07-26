@@ -70,7 +70,10 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(
+  git
+  zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,6 +103,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Config for make WSL no delay after execute commands
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+export PATH=$PATH:"/mnt/c/Users/mashu/AppData/Local/Programs/Microsoft VS Code/bin"
+
 # Golang Configuration
 export GOPATH=/mnt/c/Users/mashu/Documents/WebDeveloper/GoLinux
 export GOROOT=/usr/local/go
@@ -108,13 +115,15 @@ export PATH=$PATH:$GOPATH
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 
-#Docker Configuration
+# Docker Configuration
 export DOCKER_HOST=tcp://192.168.99.100:2376
 export DOCKER_CERT_PATH=/mnt/c/Users/mashu/.docker/machine/certs
 export DOCKER_TLS_VERIFY=1
 
-#Environment Variable
+# PHP Configuration
+export PATH=$PATH:$HOME/.config/composer/vendor/bin
 
+# NVM Configuration
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
