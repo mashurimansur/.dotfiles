@@ -1,10 +1,9 @@
 #!/bin/bash
 
-GO_VERSION="1.23.4" # Sesuaikan versi
-INSTALL_DIR="/usr/local"
 
 echo "🔹 Fetching the latest Go version..."
 GO_LATEST_VERSION=$(curl -s https://go.dev/dl/ | grep -oP 'go[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
+INSTALL_DIR="/usr/local"
 
 if ! command -v go &> /dev/null; then
     echo "🔹 Installing Go $GO_VERSION..."
