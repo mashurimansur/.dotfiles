@@ -18,6 +18,7 @@ fi
 echo "🔹 Configuring Go environment in ~/.zshrc..."
 # Definisikan variabel yang akan dicek
 GO_VARS=(
+    'export PATH=$PATH:/usr/local/go/bin'
     'export GOPATH=$HOME/go'
     'export GOROOT=/usr/local/go'
     'export GOBIN=$GOPATH/bin'

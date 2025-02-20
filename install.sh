@@ -21,6 +21,7 @@ echo "🔹 Checking and removing old configuration files..."
 [ -f "$HOME/.zshrc" ] && rm "$HOME/.zshrc" && echo "✅ Removed: ~/.zshrc"
 [ -f "$HOME/.p10k.zsh" ] && rm "$HOME/.p10k.zsh" && echo "✅ Removed: ~/.p10k.zsh"
 
+exec zsh
 stow zsh
 stow gitconfig
 stow nvim
