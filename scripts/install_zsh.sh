@@ -20,6 +20,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 # Copy konfigurasi default
 rm ~/.zshrc
+rm ~/.p10k.zsh
 stow ~/.dotfiles/zsh
 # cp ~/.dotfiles/.zshrc ~/.zshrc
 
