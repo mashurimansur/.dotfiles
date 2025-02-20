@@ -17,12 +17,16 @@ echo "🔹 Checking and removing old configuration files..."
 
 stow zsh
 stow gitconfig
-stow nvim
 
 bash scripts/install_go.sh
+
+#setup nodejs
 bash scripts/install_nvm.sh
-bash scripts/install_nvim.sh
 bash scripts/install_node.sh
+
+# setup nvim
+bash scripts/install_nvim.sh
+stow nvim
 
 echo "✅ Installation complete!"
 
