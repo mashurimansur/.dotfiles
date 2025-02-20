@@ -3,15 +3,18 @@
 GO_VERSION="1.23.4" # Sesuaikan versi
 INSTALL_DIR="/usr/local"
 
-echo "🔹 Installing Go $GO_VERSION..."
-wget https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz
-sudo tar -C $INSTALL_DIR -xzf go$GO_VERSION.linux-amd64.tar.gz
-rm go$GO_VERSION.linux-amd64.tar.gz
+if ! command -v go &> /dev/null; then
+    echo "🔹 Installing Go $GO_VERSION..."
+    wget https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz
+    sudo tar -C $INSTALL_DIR -xzf go$GO_VERSION.linux-amd64.tar.gz
+    rm go$GO_VERSION.linux-amd64.tar.gz 
+else
+    echo "✅ Go already installed!"
+fi
 
 # Set PATH
 # echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
 #!/bin/bash
-
 echo "🔹 Configuring Go environment in ~/.zshrc..."
 # Definisikan variabel yang akan dicek
 GO_VARS=(
