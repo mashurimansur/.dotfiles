@@ -3,11 +3,14 @@
 GO_VERSION="1.23.4" # Sesuaikan versi
 INSTALL_DIR="/usr/local"
 
+echo "🔹 Fetching the latest Go version..."
+GO_LATEST_VERSION=$(curl -s https://go.dev/dl/ | grep -oP 'go[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
+
 if ! command -v go &> /dev/null; then
     echo "🔹 Installing Go $GO_VERSION..."
-    wget https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz
-    sudo tar -C $INSTALL_DIR -xzf go$GO_VERSION.linux-amd64.tar.gz
-    rm go$GO_VERSION.linux-amd64.tar.gz 
+    wget https://go.dev/dl/$GO_LATEST_VERSION.linux-amd64.tar.gz
+    sudo tar -C $INSTALL_DIR -xzf $GO_LATEST_VERSION.linux-amd64.tar.gz
+    rm $GO_LATEST_VERSION.linux-amd64.tar.gz 
 else
     echo "✅ Go already installed!"
 fi
