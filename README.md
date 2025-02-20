@@ -1,17 +1,34 @@
-Usage
------
+# My dotfiles
 
-1. Install (using [yadm], which is effectively just a dope wrapper around git):
+This directory contains the dotfiles for my system
 
-```sh
-case "${OSTYPE:?}" in
-  linux*)   sudo apt install -y yadm ;;
-  darwin*)  brew install yadm ;;
-esac
+## Requirements
+
+Ensure you have the following installed on your system
+
+### Git
+
+```
+sudo apt-get install git
 ```
 
-2. Clone:
+### Stow
 
-```sh
-yadm clone --bootstrap 'git@github.com:mashurimansur/dotfiles.git'
+```
+sudo apt-get install stow
+```
+
+## Installation
+
+First, check out the dotfiles repo in your $HOME directory using git
+
+```
+$ git clone https://github.com/mashurimansur/.dotfiles.git
+$ cd dotfiles
+```
+
+then use GNU stow to create symlinks
+
+```
+$ stow .
 ```
