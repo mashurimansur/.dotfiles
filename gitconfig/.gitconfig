@@ -1,0 +1,19 @@
+[user]
+	name = Mashuri Mansur
+	email = mashurimansur18@gmail.com
+[init]
+	defaultBranch = master
+[pull]
+	rebase = true
+[core]
+	editor = code --wait
+[diff]
+        tool = default-difftool
+[difftool "default-difftool"]
+        cmd = code --wait --diff $LOCAL $REMOTE
+[alias]
+        cm = commit -m
+        cam = commit -am
+        po = push origin
+        cd = checkout develop
+        cb = checkout -b
