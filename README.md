@@ -6,23 +6,11 @@ This directory contains the dotfiles for my system
 
 Ensure you have the following installed on your system
 
-### Git
-
-```
-sudo apt-get install git
-```
-
-### Stow
-
-```
-sudo apt-get install stow
-```
-
 ## Installation
 
-First, check out the dotfiles repo in your $HOME directory using git
+First, check out the .dotfiles repo in your $HOME directory using git
 
-```
+```bash
 git clone https://github.com/mashurimansur/.dotfiles.git
 cd .dotfiles
 bash install.sh
@@ -30,6 +18,6 @@ bash install.sh
 
 then use GNU stow to create symlinks
 
-```
-stow {name-folder}
+```bash
+stow {folder-name}
 ```
