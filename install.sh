@@ -28,6 +28,13 @@ bash scripts/install_node.sh
 bash scripts/install_nvim.sh
 stow nvim
 
+if grep -qi microsoft /proc/sys/kernel/osrelease; then
+    echo "Running on WSL"
+else
+    echo "Running on native Ubuntu"
+    bash scripts/install_vscode.sh
+fi
+
 echo "✅ Installation complete!"
 
 # Auto-switch to Zsh
