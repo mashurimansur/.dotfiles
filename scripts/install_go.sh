@@ -1,12 +1,12 @@
 #!/bin/bash
 
-
 echo "🔹 Fetching the latest Go version..."
-GO_LATEST_VERSION=$(curl -s https://go.dev/dl/ | grep -oP 'go[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
-INSTALL_DIR="/usr/local"
 
 if ! command -v go &> /dev/null; then
     echo "🔹 Installing Go $GO_VERSION..."
+    GO_LATEST_VERSION=$(curl -s https://go.dev/dl/ | grep -oP 'go[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
+    INSTALL_DIR="/usr/local"
+    
     wget https://go.dev/dl/$GO_LATEST_VERSION.linux-amd64.tar.gz
     sudo tar -C $INSTALL_DIR -xzf $GO_LATEST_VERSION.linux-amd64.tar.gz
     rm $GO_LATEST_VERSION.linux-amd64.tar.gz 
