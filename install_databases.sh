@@ -12,23 +12,35 @@ is_running() {
 
 # Function to install MySQL
 install_mysql() {
-    echo "Installing MySQL..."
-    bash database/install_mysql.sh
-    echo "✅ MySQL installation complete!"
+    if is_installed "mysql-server"; then
+        echo "✅ MySQL is already installed. Skipping installation."
+    else
+        echo "Installing MySQL..."
+        bash database/install_mysql.sh
+        echo "✅ MySQL installation complete!"
+    fi
 }
 
 # Function to install PostgreSQL
 install_postgresql() {
-    echo "Installing PostgreSQL..."
-    bash database/install_postgres.sh
-    echo "✅ PostgreSQL installation complete!"
+     if is_installed "postgresql"; then
+        echo "✅ PostgreSQL is already installed. Skipping installation."
+    else
+        echo "Installing PostgreSQL..."
+        bash database/install_postgres.sh
+        echo "✅ PostgreSQL installation complete!"
+    fi
 }
 
 # Function to install MongoDB
 install_mongodb() {
-    echo "Installing MongoDB..."
-    bash database/install_mongodb.sh
-    echo "✅ MongoDB installation complete!"
+    if is_installed "mongodb-org"; then
+        echo "✅ MongoDB is already installed. Skipping installation."
+    else
+        echo "Installing MongoDB..."
+        bash database/install_mongodb.sh
+        echo "✅ MongoDB installation complete!"
+    fi
 }
 
 # Function to install Redis
