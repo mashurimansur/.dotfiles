@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Define MySQL credentials
+MYSQL_ROOT_PASSWORD="your_secure_password"
+MYSQL_USER="newuser"
+MYSQL_PASSWORD="newpassword"
+MYSQL_DATABASE="newdatabase"
+
+# Update package list
+echo "Updating package list..."
+sudo apt update -y
+
+# Install MySQL Server
+echo "Installing MySQL Server..."
+sudo apt install -y mysql-server
+
+# Start and enable MySQL service
+echo "Starting MySQL service..."
+sudo systemctl start mysql
+sudo systemctl enable mysql
+
+# Secure MySQL installation (non-interactive)
+echo "Configuring MySQL security settings..."
+sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$MYSQL_ROOT_PASSWORD';"
+sudo mysql -e "DELETE FROM mysql.user WHERE User='';"
+sudo mysql -e "DROP DATABASE IF EXISTS test;"
+sudo mysql -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
+sudo mysql -e "FLUSH PRIVILEGES;"
+
+# Create a new MySQL user and database
+echo "Creating MySQL user and database..."
+sudo mysql -e "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
+sudo mysql -e "CREATE DATABASE $MYSQL_DATABASE;"
+sudo mysql -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';"
+sudo mysql -e "FLUSH PRIVILEGES;"
+
+# Enable remote access (optional)
+echo "Configuring MySQL for remote access..."
+sudo sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
+
+# Restart MySQL to apply changes
+echo "Restarting MySQL service..."
+sudo systemctl restart mysql
+
+# Print completion message
+echo "✅ MySQL installation complete!"
+echo "🔑 Root Password: $MYSQL_ROOT_PASSWORD"
+echo "🔑 User: $MYSQL_USER | Database: $MYSQL_DATABASE"
+echo "📢 Remote access enabled. Ensure firewall rules allow external connections."
