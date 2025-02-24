@@ -30,15 +30,23 @@ install_redis() {
 
 # Function to display menu
 show_menu() {
-    echo "📦 Database Installation Script"
-    echo "1) Install MySQL"
-    echo "2) Install PostgreSQL"
-    echo "3) Install MongoDB"
-    echo "4) Install Redis"
-    echo "5) Install ALL databases"
-    echo "6) Exit"
-    echo -n "Choose an option: "
+    echo "======================================================="
+    echo "          📦 DATABASE INSTALLATION SCRIPT             "
+    echo "======================================================="
+    echo "  🔹 This script allows you to install databases:      "
+    echo "  🔹 If a database is already installed, it will skip "
+    echo "  🔹 Choose an option from the menu below:            "
+    echo "-------------------------------------------------------"
+    echo "  [1] 🚀 Install MySQL                                 "
+    echo "  [2] 🐘 Install PostgreSQL                            "
+    echo "  [3] 🍃 Install MongoDB                               "
+    echo "  [4] 🔴 Install Redis                                 "
+    echo "  [5] 🔄 Install ALL databases                        "
+    echo "  [6] ❌ Exit                                         "
+    echo "-------------------------------------------------------"
+    echo -n "👉 Choose an option: "
 }
+
 
 # Main script execution
 while true; do

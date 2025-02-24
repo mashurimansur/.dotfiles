@@ -29,3 +29,4 @@ sudo systemctl restart redis
 echo "✅ Redis installation complete!"
 echo "📢 Remote access enabled on port $REDIS_PORT. Ensure firewall rules allow external connections."
 echo "🔑 Redis password set (change in /etc/redis/redis.conf)"
+echo "👍 After set redis password restart redis before use (sudo systemctl enable redis)"
