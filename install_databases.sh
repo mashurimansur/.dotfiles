@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Function to check if a package is installed
+is_installed() {
+    dpkg -l | grep -q "$1"
+}
+
+# Function to check if a service is running
+is_running() {
+    systemctl is-active --quiet "$1"
+}
+
 # Function to install MySQL
 install_mysql() {
     echo "Installing MySQL..."
@@ -23,9 +33,13 @@ install_mongodb() {
 
 # Function to install Redis
 install_redis() {
-    echo "Installing Redis..."
-    bash database/install_redis.sh
-    echo "✅ Redis installation complete!"
+    if is_installed "redis-server"; then
+        echo "✅ Redis is already installed. Skipping installation."
+    else
+        echo "Installing Redis..."
+        bash database/install_redis.sh
+        echo "✅ Redis installation complete!"
+    fi
 }
 
 # Function to display menu
