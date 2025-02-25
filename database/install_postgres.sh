@@ -1,18 +1,34 @@
 #!/bin/bash
 
 # Define PostgreSQL credentials
-PG_VERSION="15"  # Change this to the required version
 PG_USER="newuser"
 PG_PASSWORD="newpassword"
 PG_DATABASE="newdatabase"
+PG_VERSION="16"
 
 # Update package list
 echo "Updating package list..."
 sudo apt update -y
 
-# Install PostgreSQL
-echo "Installing PostgreSQL..."
-sudo apt install -y postgresql postgresql-contrib
+# Install required packages
+echo "Installing dependencies..."
+sudo apt install -y wget gnupg2 software-properties-common
+
+# Add PostgreSQL APT repository
+echo "Adding PostgreSQL APT repository..."
+echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+
+# Import PostgreSQL GPG key
+echo "Importing PostgreSQL GPG key..."
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+# Update package list again
+echo "Updating package list..."
+sudo apt update -y
+
+# Install the selected PostgreSQL version
+echo "Installing PostgreSQL $PG_VERSION..."
+sudo apt install -y "postgresql-$PG_VERSION" "postgresql-client-$PG_VERSION" postgresql-contrib
 
 # Start and enable PostgreSQL service
 echo "Starting PostgreSQL service..."
@@ -38,6 +54,6 @@ echo "Restarting PostgreSQL service..."
 sudo systemctl restart postgresql
 
 # Print completion message
-echo "✅ PostgreSQL installation complete!"
+echo "✅ PostgreSQL $PG_VERSION installation complete!"
 echo "🔑 User: $PG_USER | Database: $PG_DATABASE"
-echo "📢 Remote access enabled (if applicable). Make sure to allow port 5432 in firewall."
+echo "📢 Remote access enabled. Ensure port 5432 is allowed in your firewall settings."
