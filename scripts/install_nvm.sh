@@ -7,6 +7,8 @@ else
     echo "✅ NVM already installed!"
 fi
 
+CONFIG_FILE="$HOME/.zshrc"
+
 # Load NVM in shell
 NVM_CONFIG=(
     'export NVM_DIR="$HOME/.nvm"'
@@ -16,8 +18,8 @@ NVM_CONFIG=(
 
 # Loop untuk menambahkan hanya jika belum ada
 for VAR in "${NVM_CONFIG[@]}"; do
-    if ! grep -qxF "$VAR" ~/.zshrc; then
-        echo "$VAR" >> ~/.zshrc
+    if ! grep -qxF "$VAR" "$CONFIG_FILE"; then
+        echo "$VAR" >> "$CONFIG_FILE"
         echo "✅ Added: $VAR"
     else
         echo "⚠️ Already exists: $VAR"
