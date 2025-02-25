@@ -4,6 +4,13 @@
 PG_USER="newuser"
 PG_PASSWORD="newpassword"
 PG_DATABASE="newdatabase"
+
+# PostgreSQL 17: Released on September 26, 2024.
+# PostgreSQL 16: Released on September 14, 2023.
+# PostgreSQL 15: Released on October 13, 2022.
+# PostgreSQL 14: Released on September 30, 2021.
+# PostgreSQL 13: Released on September 24, 2020.
+# PostgreSQL 12: Released on October 3, 2019.
 PG_VERSION="16"
 
 # Update package list
