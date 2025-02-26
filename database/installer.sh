@@ -56,23 +56,32 @@ install_redis() {
 
 # Function to display menu
 show_menu() {
-    echo "======================================================="
-    echo "          📦 DATABASE INSTALLATION SCRIPT             "
-    echo "======================================================="
-    echo "  🔹 This script allows you to install databases:      "
-    echo "  🔹 If a database is already installed, it will skip "
-    echo "  🔹 Choose an option from the menu below:            "
-    echo "-------------------------------------------------------"
-    echo "  [1] 🚀 Install MySQL                                 "
-    echo "  [2] 🐘 Install PostgreSQL                            "
-    echo "  [3] 🍃 Install MongoDB                               "
-    echo "  [4] 🔴 Install Redis                                 "
-    echo "  [5] 🔄 Install ALL databases                        "
-    echo "  [6] ❌ Exit                                         "
-    echo "-------------------------------------------------------"
-    echo -n "👉 Choose an option: "
-}
+    # Define colors
+    BLUE="\e[1;34m"
+    GREEN="\e[1;32m"
+    YELLOW="\e[1;33m"
+    MAGENTA="\e[1;35m"
+    CYAN="\e[1;36m"
+    RED="\e[1;31m"
+    WHITE="\e[1;37m"
+    RESET="\e[0m"  # Reset color
 
+    echo -e "${BLUE}=======================================================${RESET}"
+    echo -e "          ${YELLOW}📦 DATABASE INSTALLATION SCRIPT${RESET}"
+    echo -e "${BLUE}=======================================================${RESET}"
+    echo -e "  ${GREEN}🔹 This script allows you to install databases:${RESET}"
+    echo -e "  ${GREEN}🔹 If a database is already installed, it will be skipped.${RESET}"
+    echo -e "  ${GREEN}🔹 Choose an option from the menu below:${RESET}"
+    echo -e "${BLUE}-------------------------------------------------------${RESET}"
+    echo -e "  [${CYAN}1${RESET}] 🚀 ${YELLOW}Install MySQL${RESET}"
+    echo -e "  [${CYAN}2${RESET}] 🐘 ${MAGENTA}Install PostgreSQL${RESET}"
+    echo -e "  [${CYAN}3${RESET}] 🍃 ${GREEN}Install MongoDB${RESET}"
+    echo -e "  [${CYAN}4${RESET}] 🔴 ${RED}Install Redis${RESET}"
+    echo -e "  [${CYAN}5${RESET}] 🔄 ${CYAN}Install ALL databases${RESET}"
+    echo -e "  [${CYAN}6${RESET}] ❌ ${WHITE}Back To Main Menu${RESET}"
+    echo -e "${BLUE}-------------------------------------------------------${RESET}"
+    echo -ne "👉 ${YELLOW}Choose an option:${RESET} "
+}
 
 # Main script execution
 while true; do
@@ -89,7 +98,7 @@ while true; do
             install_mongodb
             install_redis
             ;;
-        6) echo "Exiting script. Bye! 👋"; exit 0 ;;
+        6) echo "Back to Main Menu. Bye! 👋"; exit 0 ;;
         *) echo "Invalid option. Please try again!" ;;
     esac
 done
