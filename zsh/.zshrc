@@ -120,8 +120,7 @@ source $ZSH/oh-my-zsh.sh
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/go
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOPATH
-export PATH=$PATH:$GOBIN
+export PATH=$PATH:$GOROOT/bin:$GOBIN:$GOPATH/bin
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

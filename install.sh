@@ -52,7 +52,7 @@ bash scripts/install_nvm.sh "$OS"
 bash scripts/install_node.sh
 
 # Setup Neovim
-bash scripts/install_nvim.sh "$OS" "$PKG_MANAGER"
+bash applications/install_nvim.sh "$OS" "$PKG_MANAGER"
 stow nvim
 
 # Check if running on WSL or native Linux/macOS
@@ -61,11 +61,11 @@ if [[ "$OS" == "Linux" && -f /proc/sys/kernel/osrelease ]]; then
         echo "🖥 Running on WSL"
     else
         echo "🖥 Running on native Ubuntu"
-        bash scripts/install_vscode.sh
+        bash applications/install_vscode.sh
     fi
 elif [[ "$OS" == "Darwin" ]]; then
     echo "🖥 Running on macOS"
-    bash scripts/install_vscode.sh
+    bash applications/install_vscode.sh
 fi
 
 echo "✅ Installation complete!"
