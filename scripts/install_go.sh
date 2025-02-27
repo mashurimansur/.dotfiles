@@ -2,14 +2,13 @@
 
 
 # Validate inputs
-if [[ -z "$1" || -z "$2" ]]; then
-    echo "❌ Usage: $0 <OS> <PKG_MANAGER>"
+if [[ -z "$1" ]]; then
+    echo "❌ Usage: $0 <OS>"
     exit 1
 fi
 
 # Detect OS
 OS=$1
-PKG_MANAGER=$2
 
 echo "✅ OS detected: $OS"
 echo "🔹 Fetching the latest Go version..."
@@ -26,7 +25,7 @@ if ! command -v go &>/dev/null; then
         sudo tar -C $INSTALL_DIR -xzf go$GO_LATEST_VERSION.linux-amd64.tar.gz
         rm $GO_LATEST_VERSION.linux-amd64.tar.gz 
     elif [[ "$OS" == "Darwin" ]]; then
-        $PKG_MANAGER install go@$GO_LATEST_VERSION
+        brew install go@$GO_LATEST_VERSION
     fi
 else
     echo "✅ Go is already installed!"

@@ -1,74 +1,57 @@
 #!/bin/bash
 
-echo "🔹 Starting installation..."
-
 # Detect OS
 OS="$(uname -s)"
 
-if [[ "$OS" == "Linux" ]]; then
-    echo "✅ Linux detected"
-    PKG_MANAGER="sudo apt"
-elif [[ "$OS" == "Darwin" ]]; then
-    echo "✅ macOS detected"
-    if ! command -v brew &>/dev/null; then
-        echo "🔹 Homebrew not found. Installing..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        echo "✅ Homebrew installed successfully!"
-    else
-        echo "✅ Homebrew is already installed!"
-    fi
-    PKG_MANAGER="brew"
-else
-    echo "❌ Unsupported OS: $OS"
-    exit 1
-fi
+basic_install() {
+    bash scripts/installer.sh
+}
 
-# Update & install essential packages
-echo "🔹 Updating system and installing essential packages..."
-if [[ "$OS" == "Linux" ]]; then
-    $PKG_MANAGER update && $PKG_MANAGER upgrade -y
-    $PKG_MANAGER install -y curl wget git unzip build-essential stow
-elif [[ "$OS" == "Darwin" ]]; then
-    $PKG_MANAGER update
-    $PKG_MANAGER install curl wget git unzip stow
-fi
+install_databases() {
+    bash database/installer.sh
+}
 
-# Run individual installation scripts
-bash scripts/install_zsh.sh "$OS" "$PKG_MANAGER"
+install_apps() {
+    bash applications/installer.sh "$OS"
+}
 
-# Remove old Zsh configuration and ap   ply new one
-echo "🔹 Checking and removing old configuration files..."
-[ -f "$HOME/.zshrc" ] && rm "$HOME/.zshrc" && echo "✅ Removed: ~/.zshrc"
-[ -f "$HOME/.p10k.zsh" ] && rm "$HOME/.p10k.zsh" && echo "✅ Removed: ~/.p10k.zsh"
-echo "✅ Old Zsh configuration files cleaned up!"
+# Function to display menu
+show_menu() {
+    # Define colors
+    BLUE="\e[1;34m"
+    GREEN="\e[1;32m"
+    YELLOW="\e[1;33m"
+    MAGENTA="\e[1;35m"
+    CYAN="\e[1;36m"
+    RED="\e[1;31m"
+    WHITE="\e[1;37m"
+    RESET="\e[0m"  # Reset color
 
-stow zsh
-stow gitconfig
+    echo -e "${BLUE}=======================================================${RESET}"
+    echo -e "          ${YELLOW}📦 SYSTEM INSTALLATION MENU${RESET}"
+    echo -e "${BLUE}=======================================================${RESET}"
+    echo -e "  ${GREEN}🔹 Select an option to install different components:${RESET}"
+    echo -e "  ${GREEN}🔹 Each option installs a specific type of software.${RESET}"
+    echo -e "  ${GREEN}🔹 Follow the prompts to complete installation.${RESET}"
+    echo -e "${BLUE}-------------------------------------------------------${RESET}"
+    echo -e "  [${CYAN}1${RESET}] 🚀 ${YELLOW}Basic Install${RESET} - Installs essential system utilities"
+    echo -e "  [${CYAN}2${RESET}] 🐘 ${MAGENTA}Install Database${RESET} - Installs MySQL, PostgreSQL, and MongoDB"
+    echo -e "  [${CYAN}3${RESET}] 🍃 ${GREEN}Install Apps${RESET} - Installs commonly used applications"
+    echo -e "  [${CYAN}0${RESET}] ❌ ${WHITE}Exit${RESET} - Exit the script"
+    echo -e "${BLUE}-------------------------------------------------------${RESET}"
+    echo -ne "👉 ${YELLOW}Choose an option:${RESET} "
+}
 
-bash scripts/install_go.sh "$OS" "$PKG_MANAGER"
 
-# Setup Node.js
-bash scripts/install_nvm.sh "$OS"
-bash scripts/install_node.sh
-
-# Setup Neovim
-bash applications/install_nvim.sh "$OS" "$PKG_MANAGER"
-stow nvim
-
-# Check if running on WSL or native Linux/macOS
-if [[ "$OS" == "Linux" && -f /proc/sys/kernel/osrelease ]]; then
-    if grep -qi microsoft /proc/sys/kernel/osrelease; then
-        echo "🖥 Running on WSL"
-    else
-        echo "🖥 Running on native Ubuntu"
-        bash applications/install_vscode.sh
-    fi
-elif [[ "$OS" == "Darwin" ]]; then
-    echo "🖥 Running on macOS"
-    bash applications/install_vscode.sh
-fi
-
-echo "✅ Installation complete!"
-
-# Auto-switch to Zsh
-exec zsh
+# Main script execution
+while true; do
+    show_menu
+    read -r choice
+    case $choice in
+        1) basic_install ;;
+        2) install_databases ;;
+        3) install_apps ;;
+        0) echo "Exit. Bye! 👋"; exit 0 ;;
+        *) echo "Invalid option. Please try again!" ;;
+    esac
+done

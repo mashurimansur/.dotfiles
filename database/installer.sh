@@ -78,7 +78,7 @@ show_menu() {
     echo -e "  [${CYAN}3${RESET}] 🍃 ${GREEN}Install MongoDB${RESET}"
     echo -e "  [${CYAN}4${RESET}] 🔴 ${RED}Install Redis${RESET}"
     echo -e "  [${CYAN}5${RESET}] 🔄 ${CYAN}Install ALL databases${RESET}"
-    echo -e "  [${CYAN}6${RESET}] ❌ ${WHITE}Back To Main Menu${RESET}"
+    echo -e "  [${CYAN}0${RESET}] ❌ ${WHITE}Back To Main Menu${RESET}"
     echo -e "${BLUE}-------------------------------------------------------${RESET}"
     echo -ne "👉 ${YELLOW}Choose an option:${RESET} "
 }
@@ -98,7 +98,7 @@ while true; do
             install_mongodb
             install_redis
             ;;
-        6) echo "Back to Main Menu. Bye! 👋"; exit 0 ;;
+        0) echo "Back to Main Menu. Bye! 👋"; exit 0 ;;
         *) echo "Invalid option. Please try again!" ;;
     esac
 done

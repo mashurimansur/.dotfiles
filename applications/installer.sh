@@ -1,11 +1,20 @@
 #!/bin/bash
 
+# Validate inputs
+if [[ -z "$1" ]]; then
+    echo "❌ Usage: $0 <OS>"
+    exit 1
+fi
+
+# Detect OS
+OS=$1
+
 install_neovim() {
-    bash applications/install_nvim.sh "Linux"
+    bash applications/install_nvim.sh "$OS"
 }
 
 install_vscode() {
-    echo "Installing VS Code"
+    bash applications/install_vscode.sh "$OS"
 }
 
 install_all_apps() {
@@ -31,7 +40,7 @@ show_menu() {
     echo -e "  [1] 🟢 Install Neovim                                   "
     echo -e "  [2] 🔵 Install VS Code                                  "
     echo -e "  [3] ⚡ Install All Apps                                 "
-    echo -e "  [4] 🔙 Back to Main Menu                               "
+    echo -e "  [0] 🔙 Back to Main Menu                               "
     echo -e "${YELLOW}-----------------------------------------------------------${RESET}"
     echo -ne "👉 Please enter your choice: "
 }
@@ -44,7 +53,7 @@ while true; do
         1) install_neovim ;;
         2) install_vscode ;;
         3) install_all_apps ;;
-        4) echo "Back to Main Menu 👋"; exit 0 ;;
+        0) echo "Back to Main Menu 👋"; exit 0 ;;
         *) echo "Invalid option. Please try again!" ;;
     esac
 done

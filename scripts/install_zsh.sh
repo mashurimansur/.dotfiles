@@ -1,22 +1,21 @@
 #!/bin/bash
 
 # Validate inputs
-if [[ -z "$1" || -z "$2" ]]; then
-    echo "❌ Usage: $0 <OS> <PKG_MANAGER>"
+if [[ -z "$1" ]]; then
+    echo "❌ Usage: $0 <OS>"
     exit 1
 fi
 
 # Detect OS
 OS=$1
-PKG_MANAGER=$2
 
 # Install Zsh
 echo "🔹 Installing Zsh..."
 if [[ "$OS" == "Linux" ]]; then
-    $PKG_MANAGER update -y
-    $PKG_MANAGER install -y zsh
+    sudo apt update -y
+    sudo apt install -y zsh
 elif [[ "$OS" == "Darwin" ]]; then
-    $PKG_MANAGER install zsh
+    brew install zsh
 fi
 
 # Change default shell to Zsh
