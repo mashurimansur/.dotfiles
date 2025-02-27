@@ -1,9 +1,14 @@
 #!/bin/bash
 
-# Define PostgreSQL credentials
-PG_USER="newuser"
-PG_PASSWORD="newpassword"
-PG_DATABASE="newdatabase"
+# Prompt user for PostgreSQL credentials with defaults
+read -p "Enter PostgreSQL username [default: newuser]: " PG_USER
+PG_USER=${PG_USER:-newuser}
+
+read -p "Enter password for PostgreSQL user [default: newpassword]: " PG_PASSWORD
+PG_PASSWORD=${PG_PASSWORD:-newpassword}
+
+read -p "Enter database name to create [default: newdatabase]: " PG_DATABASE
+PG_DATABASE=${PG_DATABASE:-newdatabase}
 
 # PostgreSQL 17: Released on September 26, 2024.
 # PostgreSQL 16: Released on September 14, 2023.
@@ -11,7 +16,8 @@ PG_DATABASE="newdatabase"
 # PostgreSQL 14: Released on September 30, 2021.
 # PostgreSQL 13: Released on September 24, 2020.
 # PostgreSQL 12: Released on October 3, 2019.
-PG_VERSION="16"
+read -p "Enter PostgreSQL version to install [default: 16]: " PG_VERSION
+PG_VERSION=${PG_VERSION:-16}
 
 # Update package list
 echo "Updating package list..."
