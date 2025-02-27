@@ -1,11 +1,20 @@
 #!/bin/bash
 
-# Define MongoDB credentials
-MONGO_USER="newuser"
-MONGO_PASSWORD="newpassword"
-MONGO_DATABASE="newdatabase"
-MONGO_PORT="27017"
-MONGO_VERSION="8.0"  # Change this to the required version
+# Prompt user for MongoDB credentials with defaults
+read -p "Enter MongoDB username [default: newuser]: " MONGO_USER
+MONGO_USER=${MONGO_USER:-newuser}
+
+read -p "Enter password for MongoDB user [default: newpassword]: " MONGO_PASSWORD
+MONGO_PASSWORD=${MONGO_PASSWORD:-newpassword}
+
+read -p "Enter database name to create [default: newdatabase]: " MONGO_DATABASE
+MONGO_DATABASE=${MONGO_DATABASE:-newdatabase}
+
+read -p "Enter MongoDB port [default: 27017]: " MONGO_PORT
+MONGO_PORT=${MONGO_PORT:-27017}
+
+read -p "Enter MongoDB version [default: 8.0]: " MONGO_VERSION
+MONGO_VERSION=${MONGO_VERSION:-8.0}
 
 # Update package list
 echo "Updating package list..."
@@ -30,10 +39,8 @@ sudo apt-get install -y mongodb-org
 
 # Ensure MongoDB directories exist
 echo "Ensuring necessary directories exist..."
-sudo mkdir -p /var/lib/mongodb
-sudo mkdir -p /var/log/mongodb
-sudo chown -R mongodb:mongodb /var/lib/mongodb
-sudo chown -R mongodb:mongodb /var/log/mongodb
+sudo mkdir -p /var/lib/mongodb /var/log/mongodb
+sudo chown -R mongodb:mongodb /var/lib/mongodb /var/log/mongodb
 
 # Start and enable MongoDB service
 echo "Starting MongoDB service..."
@@ -62,4 +69,6 @@ mongosh --quiet --eval "
   });
 "
 
-echo "✅ MongoDB installation and user setup complete!"
+echo "✅ MongoDB $MONGO_VERSION installation complete!"
+echo "🔑 User: $MONGO_USER | Database: $MONGO_DATABASE | Port: $MONGO_PORT"
+echo "📢 Ensure firewall rules allow connections on port $MONGO_PORT."
