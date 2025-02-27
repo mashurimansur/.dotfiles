@@ -1,11 +1,14 @@
 # 🚀 **My Dotfiles**  
 
-This repository contains my personal **dotfiles** for setting up and managing my development environment effortlessly. It includes configurations for **Zsh, Neovim, Git, Node.js, Go, and more**, making it easy to set up a fresh system in minutes.  
+This repository contains my personal **dotfiles** for setting up and managing my development environment effortlessly. It includes configurations for **Zsh, Neovim, Git, Node.js, Go, and more**, making it easy to set up a fresh system in minutes. 
+
+✅ **Now supports both** **Linux** 🐧 **and macOS** 🍏!
 
 ## 📌 **Features**
 - 🔹 **Automated setup** with `install.sh`  
+- 🔹 **Modular installer** to choose which components to install  
 - 🔹 **Zsh + Oh My Zsh** with **Powerlevel10k**  
-- 🔹 **Neovim configuration** for an enhanced development experience  
+- 🔹 **Neovim & VSCode configuration** for an enhanced development experience  
 - 🔹 **Node.js & NVM installation** for JavaScript/TypeScript development  
 - 🔹 **Go environment setup** with the latest version  
 - 🔹 **Git configuration** with global aliases and settings  
@@ -31,27 +34,31 @@ git clone https://github.com/mashurimansur/.dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 ```
 
-### **2️⃣ Run the Installation Script**
-Execute the `install.sh` script to automatically install dependencies and configure your system:  
+### **2️⃣ Run the Main Installer**
+Execute the `install.sh` script to start the installation process:  
 ```bash
 bash install.sh
 ```
+The script will prompt you to select which components you want to install.
 
-### **3️⃣ Use GNU Stow to Symlink Dotfiles**
-The repository uses [GNU Stow](https://www.gnu.org/software/stow/) to manage symbolic links for configuration files.  
+### **3️⃣ Choose Components to Install**
+The installation is divided into several categories:
+- **Applications**: Installs Neovim, VSCode, and other development tools.
+- **Databases**: Installs MySQL, PostgreSQL, MongoDB, and Redis.
+- **Development Tools**: Installs Go, Node.js, NVM, and Zsh.
 
-To link a specific configuration folder, use:  
+Each category has its own `installer.sh` script inside its respective folder:
 ```bash
-stow {folder-name}
+applications/installer.sh   # Installs applications (Neovim, VSCode, etc.)
+database/installer.sh       # Installs databases (MySQL, PostgreSQL, etc.)
+scripts/installer.sh        # Installs development tools (Go, Node.js, etc.)
 ```
-For example, to set up **Zsh and Neovim**:  
+
+To install a specific category manually, navigate to the folder and run its installer:
 ```bash
-stow zsh
-stow nvim
-```
-To apply all configurations at once:  
-```bash
-stow *
+bash applications/installer.sh  # Installs applications
+bash database/installer.sh      # Installs databases
+bash scripts/installer.sh       # Installs development tools
 ```
 
 ---
@@ -62,10 +69,9 @@ stow *
 | `zsh`      | Zsh + Oh My Zsh + Powerlevel10k |
 | `nvim`     | Neovim (customized for development) |
 | `gitconfig`| Git aliases and settings |
-| `scripts/install_go.sh`       | Go environment setup |
-| `scripts/install_zsh.sh`       | Installing ZSH, OhMyZSH and pluggins |
-| `scripts/install_nvm.sh`      | NVM setup |
-| `scripts/install_node.sh`      | NodeJS setup |
+| `applications/installer.sh` | Installs applications like Neovim & VSCode |
+| `database/installer.sh` | Installs databases (MySQL, PostgreSQL, MongoDB, Redis) |
+| `scripts/installer.sh` | Installs Go, Node.js, NVM, and Zsh |
 
 ---
 
