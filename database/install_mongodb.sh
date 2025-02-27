@@ -37,6 +37,12 @@ echo "Installing MongoDB..."
 sudo apt-get update -y
 sudo apt-get install -y mongodb-org
 
+# Check if MongoDB user exists, if not create it
+if ! id "mongodb" &>/dev/null; then
+    echo "MongoDB user not found. Creating..."
+    sudo useradd -r -s /bin/false mongodb
+fi
+
 # Ensure MongoDB directories exist
 echo "Ensuring necessary directories exist..."
 sudo mkdir -p /var/lib/mongodb /var/log/mongodb
@@ -44,6 +50,7 @@ sudo chown -R mongodb:mongodb /var/lib/mongodb /var/log/mongodb
 
 # Start and enable MongoDB service
 echo "Starting MongoDB service..."
+sudo systemctl daemon-reload
 sudo systemctl start mongod
 sudo systemctl enable mongod
 
