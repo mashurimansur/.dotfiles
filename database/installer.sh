@@ -77,7 +77,6 @@ show_menu() {
     echo -e "  [${CYAN}2${RESET}] 🐘 ${MAGENTA}Install PostgreSQL${RESET}"
     echo -e "  [${CYAN}3${RESET}] 🍃 ${GREEN}Install MongoDB${RESET}"
     echo -e "  [${CYAN}4${RESET}] 🔴 ${RED}Install Redis${RESET}"
-    echo -e "  [${CYAN}5${RESET}] 🔄 ${CYAN}Install ALL databases${RESET}"
     echo -e "  [${CYAN}0${RESET}] ❌ ${WHITE}Back To Main Menu${RESET}"
     echo -e "${BLUE}-------------------------------------------------------${RESET}"
     echo -ne "👉 ${YELLOW}Choose an option:${RESET} "
@@ -92,12 +91,6 @@ while true; do
         2) install_postgresql ;;
         3) install_mongodb ;;
         4) install_redis ;;
-        5)
-            install_mysql
-            install_postgresql
-            install_mongodb
-            install_redis
-            ;;
         0) echo "Back to Main Menu. Bye! 👋"; exit 0 ;;
         *) echo "Invalid option. Please try again!" ;;
     esac

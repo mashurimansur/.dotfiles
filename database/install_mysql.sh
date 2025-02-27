@@ -1,10 +1,17 @@
 #!/bin/bash
 
-# Define MySQL credentials
-MYSQL_ROOT_PASSWORD="root"
-MYSQL_USER="newuser"
-MYSQL_PASSWORD="newpassword"
-MYSQL_DATABASE="newdatabase"
+# Prompt user for MySQL credentials with defaults
+read -p "Enter MySQL root password [default: root]: " MYSQL_ROOT_PASSWORD
+MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
+
+read -p "Enter new MySQL username [default: newuser]: " MYSQL_USER
+MYSQL_USER=${MYSQL_USER:-newuser}
+
+read -p "Enter password for new MySQL user [default: newpassword]: " MYSQL_PASSWORD
+MYSQL_PASSWORD=${MYSQL_PASSWORD:-newpassword}
+
+read -p "Enter database name to create [default: newdatabase]: " MYSQL_DATABASE
+MYSQL_DATABASE=${MYSQL_DATABASE:-newdatabase}
 
 # Update package list
 echo "Updating package list..."
